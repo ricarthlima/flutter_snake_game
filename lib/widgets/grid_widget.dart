@@ -15,6 +15,7 @@ class GridWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
+      shrinkWrap: true,
       crossAxisCount: width,
       padding: EdgeInsets.zero,
       crossAxisSpacing: 0,

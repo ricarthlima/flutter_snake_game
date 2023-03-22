@@ -5,6 +5,7 @@ import 'package:flutter_snake_game/models/position.dart';
 import 'package:flutter_snake_game/widgets/appbar_game_screen.dart';
 import 'package:flutter_snake_game/widgets/grid_widget.dart';
 import 'package:flutter_snake_game/widgets/joystick_widget.dart';
+import 'package:flutter_snake_game/widgets/menu_game_screen.dart';
 
 import '../models/player.dart';
 
@@ -46,19 +47,20 @@ class _GameScreenState extends State<GameScreen> {
   int points = 0;
   int timeRemaining = 120;
 
+  bool isLeftHanded = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black.withGreen(25),
       appBar: getAppBarGameScreen(
         context: context,
         points: points,
         timeRemaining: timeRemaining,
       ),
-      body: Stack(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            alignment: Alignment.topCenter,
             padding: const EdgeInsets.all(8.0),
             child: GridWidget(
               listPlayer: listPlayers,
@@ -66,14 +68,54 @@ class _GameScreenState extends State<GameScreen> {
             ),
           ),
           Container(
-            alignment: Alignment.bottomCenter,
-            child: JoystickWidget(
-              clickDown: clickDown,
-              clickLeft: clickLeft,
-              clickRight: clickRight,
-              clickUp: clickUp,
+            margin: const EdgeInsets.all(16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: (isLeftHanded)
+                  ? [
+                      Flexible(
+                        flex: 1,
+                        child: JoystickWidget(
+                          clickDown: clickDown,
+                          clickLeft: clickLeft,
+                          clickRight: clickRight,
+                          clickUp: clickUp,
+                        ),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: MenuGameScreen(
+                            onSwitchLeftHandedChange: (value) {
+                              setState(() {
+                                isLeftHanded = value;
+                              });
+                            },
+                            valueLeftHanded: isLeftHanded),
+                      ),
+                    ]
+                  : [
+                      Flexible(
+                        flex: 1,
+                        child: MenuGameScreen(
+                            onSwitchLeftHandedChange: (value) {
+                              setState(() {
+                                isLeftHanded = value;
+                              });
+                            },
+                            valueLeftHanded: isLeftHanded),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: JoystickWidget(
+                          clickDown: clickDown,
+                          clickLeft: clickLeft,
+                          clickRight: clickRight,
+                          clickUp: clickUp,
+                        ),
+                      ),
+                    ],
             ),
-          )
+          ),
         ],
       ),
     );

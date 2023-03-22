@@ -14,12 +14,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'SnakeGame',
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: Colors.black,
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        scaffoldBackgroundColor: Colors.black.withGreen(50),
         textTheme: GoogleFonts.vt323TextTheme(),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Colors.green,
+          elevation: 0,
+        ),
       ),
       debugShowCheckedModeBanner: false,
-      home: GameScreen(),
+      home: const GameScreen(),
     );
   }
 }
