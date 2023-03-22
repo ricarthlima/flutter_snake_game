@@ -57,19 +57,16 @@ class _GameScreenState extends State<GameScreen> {
         points: points,
         timeRemaining: timeRemaining,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(8.0),
-            child: GridWidget(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            GridWidget(
               listPlayer: listPlayers,
               width: 50,
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.all(16),
-            child: Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: (isLeftHanded)
                   ? [
@@ -115,8 +112,8 @@ class _GameScreenState extends State<GameScreen> {
                       ),
                     ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
