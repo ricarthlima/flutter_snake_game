@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_snake_game/models/position.dart';
+import 'package:flutter_snake_game/widgets/appbar_game_screen.dart';
 import 'package:flutter_snake_game/widgets/grid_widget.dart';
 import 'package:flutter_snake_game/widgets/joystick_widget.dart';
 
@@ -42,11 +43,18 @@ class _GameScreenState extends State<GameScreen> {
     ),
   ];
 
+  int points = 0;
+  int timeRemaining = 120;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(title: const Text("SnakeGame - Flutter")),
+      backgroundColor: Colors.black.withGreen(25),
+      appBar: getAppBarGameScreen(
+        context: context,
+        points: points,
+        timeRemaining: timeRemaining,
+      ),
       body: Stack(
         children: [
           Container(
